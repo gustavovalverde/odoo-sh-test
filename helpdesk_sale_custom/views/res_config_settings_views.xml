@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_sale_custom_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.sale.custom.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='sale_management']" position="inside">
+                <h2>Helpdesk</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="create_ticket_from_sale_order"/>
+                        </div>
+
+                        <div class="o_setting_right_pane" id="create_ticket_from_sale_order">
+                            <label string="Create helpdesk tickets direct from sale order" for="create_ticket_from_sale_order"/>
+                            <div class="text-muted">
+                                Sale order users can create helpdesk ticket from sale order
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="allow_to_create_ticket_on_unconfirmed_orders"/>
+                        </div>
+                        <div class="o_setting_right_pane" id="allow_to_create_ticket_on_unconfirmed_orders">
+                            <label string="Allow to create ticket on unconfirmed orders" for="allow_to_create_ticket_on_unconfirmed_orders"/>
+                            <div class="text-muted">
+                                Can create and view helpdesk ticket on all sale order state
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

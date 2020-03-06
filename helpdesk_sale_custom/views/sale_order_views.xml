@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_sale_custom_view_order_form" model="ir.ui.view">
+        <field name="name">helpdesk.sale.custom.view.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <field name="create_ticket_from_sale_order" invisible="1"/>
+                <field name="allow_to_create_ticket_on_unconfirmed_orders" invisible="1"/>
+                <button name="action_view_helpdesk_ticket"
+                        string="Create ticket"
+                        type="object"
+                        class="oe_highlight"
+                        context="{'create_hepldesk_ticket':True}"
+                        attrs="{'invisible':['|', ('create_ticket_from_sale_order', '=', False), '&amp;', ('state', 'not in', ['sale','done']),('allow_to_create_ticket_on_unconfirmed_orders', '=', False)]}"
+                        groups="helpdesk_sale_custom.group_can_create_ticket_from_sale"
+                />
+            </xpath>
+
+            <xpath expr="//button[@name='action_view_invoice']" position="after">
+                <button name="action_view_helpdesk_ticket"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-tasks"
+                        context="{'search_default_crm_lead_id': active_id}"
+                        attrs="{'invisible':['|',('helpdesk_ticket_count', '=', 0),'&amp;',('state', 'not in', ['sale','done']),('allow_to_create_ticket_on_unconfirmed_orders', '=', False)]}"
+                        state="sale,done"
+                >
+                    <div class="o_stat_info">
+                        <field name="helpdesk_ticket_count" class="o_stat_value"/>
+                        <span class="o_stat_text" attrs="{'invisible': [('helpdesk_ticket_count', '&lt;', 2)]}"> Tickets</span>
+                        <span class="o_stat_text" attrs="{'invisible': [('helpdesk_ticket_count', '&gt;', 1)]}"> Ticket</span>
+                    </div>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

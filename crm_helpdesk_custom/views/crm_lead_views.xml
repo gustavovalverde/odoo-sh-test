@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_helpdesk_crm_lead_view_form" model="ir.ui.view">
+        <field name="name">crm.helpdesk.crm.lead.view.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_set_lost']" position="after">
+                <field name="create_ticket_from_crm_lead" invisible="1"/>
+                <field name="crm_stage_helpdesk_ids" invisible="1"/>
+                <field name="can_create_helpdesk_ticket" invisible="1"/>
+                <button name="action_view_helpdesk_ticket"
+                        string="Create ticket"
+                        type="object"
+                        class="oe_highlight"
+                        context="{'create_hepldesk_ticket':True}"
+                        attrs="{'invisible':['|',('create_ticket_from_crm_lead', '=', False),('can_create_helpdesk_ticket', '=', False)]}"
+                        groups="crm_helpdesk_custom.group_can_create_ticket_from_crm"
+                />
+                <!--('create_ticket_from_crm_lead', '=', False),-->
+            </xpath>
+
+            <xpath expr="//button[@name='action_schedule_meeting']" position="after">
+                <button name="action_view_helpdesk_ticket"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-tasks"
+                        context="{'search_default_crm_lead_id': active_id}"
+                        attrs="{'invisible':[('helpdesk_ticket_count', '=', 0)]}">
+                    <div class="o_stat_info">
+                        <field name="helpdesk_ticket_count" class="o_stat_value"/>
+                        <span class="o_stat_text" attrs="{'invisible': [('helpdesk_ticket_count', '&lt;', 2)]}"> Tickets</span>
+                        <span class="o_stat_text" attrs="{'invisible': [('helpdesk_ticket_count', '&gt;', 1)]}"> Ticket</span>
+                    </div>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

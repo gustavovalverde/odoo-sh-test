@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_helpdesk_custom_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">crm.helpdesk.custom.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='crm']" position="inside">
+                <h2>Helpdesk</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="create_ticket_from_crm_lead"/>
+                        </div>
+
+                        <div class="o_setting_right_pane" id="create_ticket_from_crm_lead">
+                            <label string="Create helpdesk tickets direct from lead" for="create_ticket_from_crm_lead"/>
+                            <div class="text-muted">
+                                CRM users can create helpdesk ticket from lead
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <b>Create stages</b>
+                            <div class="mt16">
+                                CRM stages can create helodesk tickets:
+                                <field name="crm_stage_ids" class="oe_inline" widget="many2many_tags"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_helpdesk_helpdesk_ticket_view_form_inherit_helpdesk_invoicing" model="ir.ui.view">
+        <field name="name">crm.lead.helpdesk.helpdesk.ticket.view.form.inherit.helpdesk.invoicing</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_sale.helpdesk_ticket_view_form_inherit_helpdesk_invoicing"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='sale_order_id']" position="before">
+                <field name="crm_lead_id" options="{&quot;no_open&quot;: True}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
